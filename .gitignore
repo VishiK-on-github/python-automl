@@ -1,2 +1,9 @@
 # python virtual environment
 env/
+
+# platform files
+data/
+*.log
+
+# IDE settings
+.vscode
