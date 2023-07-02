@@ -2,5 +2,5 @@ streamlit
 # pandas-profiling @deprecated
 ydata-profiling
 streamlit-pandas-profiling
-pycaret
+pycaret[mlops]
 xgboost==1.2.0

@@ -5,6 +5,8 @@ env/
 data/
 *.log
 best_model/
+flagged/
+mlruns/
 
 # IDE settings
 .vscode
