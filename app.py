@@ -3,7 +3,8 @@ import pandas as pd
 import os
 import ydata_profiling
 from streamlit_pandas_profiling import st_profile_report
-from pycaret.classification import setup, compare_models, pull, save_model, load_model, create_app
+from pycaret.classification import setup, compare_models, pull, save_model, load_model
+import requests
 
 with st.sidebar:
     st.image(
@@ -17,7 +18,7 @@ with st.sidebar:
 if choice == "Data Upload":
     st.title("Data Upload")
     st.text("Upload tabular data for which you would like to train a model")
-    file = st.file_uploader("Upload your dataset here !")
+    file = st.file_uploader("file_uploader", label_visibility="hidden")
     if file:
         df = pd.read_csv(file, index_col=None)
         df.to_csv("./data/dataset.csv", index=None)
@@ -38,17 +39,18 @@ if choice == "Data Profiling":
 
 if choice == "Model Training":
     st.title("Model Training")
+    st.text("Automated model training and leaderboard of trained models")
     df_ml = pd.read_csv("./data/dataset.csv", index_col=None)
     target = st.selectbox("Select target variable", df_ml.columns)
     if st.button("Train Model"):
         setup(df_ml, target=target, normalize=True, transformation=True, log_experiment=True)
         setup_df = pull()
-        st.info("These are the ML experiment settings")
+        st.subheader("These are the ML experiment settings")
         st.dataframe(setup_df)
         best_model = compare_models()
         compare_df = pull()
         st.divider()
-        st.info("Model Leaderboard")
+        st.subheader("Model Leaderboard")
         st.dataframe(compare_df)
         save_model(best_model, "./best_model/best_model")
         with open("./best_model/best_model.pkl", "rb") as f:
@@ -57,7 +59,11 @@ if choice == "Model Training":
 if choice == "Evaluate":
     st.title("Evaluate")
     st.text("Evaluate the best performing model")
-    pipeline = load_model("./best_model/best_model")
-    # df_eval = pd.read_csv("./data/dataset.csv", index_col=None)
-    # setup(data=df_eval, target="Survived")
-    # create_app(pipeline)
+    # pipeline = load_model("./best_model/best_model")
+    # TODO: implement request to the model
+    st.subheader("Model Request")
+    st.divider()
+    st.subheader("Model Response")
+    res = requests.get('https://dummyjson.com/posts')
+    out = res.json()
+    st.json(out)

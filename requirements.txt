@@ -4,3 +4,4 @@ ydata-profiling
 streamlit-pandas-profiling
 pycaret[mlops]
 xgboost==1.2.0
+# autoviz
