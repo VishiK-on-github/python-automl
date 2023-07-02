@@ -48,7 +48,9 @@ if choice == "ML":
         st.info("This is the ML model")
         st.dataframe(compare_df)
         best_model
-        save_model(best_model, "best_model")
+        save_model(best_model, "./best_model/best_model")
 
 if choice == "Download":
     st.title("Download")
+    with open("./best_model/best_model.pkl", "rb") as f:
+        st.download_button("Download Model", f, "trained_model.pkl")
