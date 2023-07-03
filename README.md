@@ -1,5 +1,15 @@
-## Python AutoML Web App
+title: Automl
 
-To start mlflow ui, use in cmd: mlflow ui
+emoji: 👁
 
-start the action
+colorFrom: indigo
+
+colorTo: green
+
+sdk: streamlit
+
+sdk_version: 1.21.0
+
+app_file: app.py
+
+pinned: false license: apache-2.0
