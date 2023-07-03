@@ -2,9 +2,9 @@
 env/
 
 # platform files
-data/
+# data/
 *.log
-best_model/
+# best_model/
 flagged/
 mlruns/
 
