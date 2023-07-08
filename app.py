@@ -1,11 +1,15 @@
+# importing dependencies
 import streamlit as st
+
+# config to keep streamlit screen in wide mode
+st.set_page_config(layout="wide")
+
 import pandas as pd
 import os
 import ydata_profiling
 from streamlit_pandas_profiling import st_profile_report
-
-# from pycaret.classification import setup, compare_models, pull, save_model, load_model
 import requests
+
 
 with st.sidebar:
     st.image(
@@ -47,6 +51,7 @@ if choice == "Model Training":
     target = st.selectbox("Select target variable", df_ml.columns)
 
     model_type = st.selectbox("Select model type", ["Classification", "Regression"])
+    MODEL_TYPE = model_type
 
     # change import based on model type
     if model_type == "Classification":
@@ -90,11 +95,12 @@ if choice == "Model Training":
 if choice == "Evaluate":
     st.title("Evaluate")
     st.text("Evaluate the best performing model")
-    # pipeline = load_model("./best_model/best_model")
-    # TODO: implement request to the model
-    st.subheader("Model Request")
-    st.divider()
-    st.subheader("Model Response")
-    res = requests.get("https://dummyjson.com/posts")
-    out = res.json()
-    st.json(out)
+    st.info("Development In Progress")
+    # # pipeline = load_model("./best_model/best_model")
+    # # TODO: implement request to the model
+    # st.subheader("Model Request")
+    # st.divider()
+    # st.subheader("Model Response")
+    # res = requests.get("https://dummyjson.com/posts")
+    # out = res.json()
+    # st.json(out)
