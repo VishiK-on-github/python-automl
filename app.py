@@ -3,7 +3,8 @@ import pandas as pd
 import os
 import ydata_profiling
 from streamlit_pandas_profiling import st_profile_report
-from pycaret.classification import setup, compare_models, pull, save_model, load_model
+
+# from pycaret.classification import setup, compare_models, pull, save_model, load_model
 import requests
 
 with st.sidebar:
@@ -13,7 +14,9 @@ with st.sidebar:
     )
     st.title("AutoML")
     st.caption("This a basic app for automated model training")
-    choice = st.radio("Navigation", ["Data Upload", "Data Profiling", "Model Training", "Evaluate"])
+    choice = st.radio(
+        "Navigation", ["Data Upload", "Data Profiling", "Model Training", "Evaluate"]
+    )
 
 if choice == "Data Upload":
     st.title("Data Upload")
@@ -42,8 +45,36 @@ if choice == "Model Training":
     st.text("Automated model training and leaderboard of trained models")
     df_ml = pd.read_csv("./data/dataset.csv", index_col=None)
     target = st.selectbox("Select target variable", df_ml.columns)
+
+    model_type = st.selectbox("Select model type", ["Classification", "Regression"])
+
+    # change import based on model type
+    if model_type == "Classification":
+        from pycaret.classification import (
+            setup,
+            compare_models,
+            pull,
+            save_model,
+            load_model,
+        )
+
+    if model_type == "Regression":
+        from pycaret.regression import (
+            setup,
+            compare_models,
+            pull,
+            save_model,
+            load_model,
+        )
+
     if st.button("Train Model"):
-        setup(df_ml, target=target, normalize=True, transformation=True, log_experiment=True)
+        setup(
+            df_ml,
+            target=target,
+            normalize=True,
+            transformation=True,
+            log_experiment=False,
+        )
         setup_df = pull()
         st.subheader("These are the ML experiment settings")
         st.dataframe(setup_df)
@@ -64,6 +95,6 @@ if choice == "Evaluate":
     st.subheader("Model Request")
     st.divider()
     st.subheader("Model Response")
-    res = requests.get('https://dummyjson.com/posts')
+    res = requests.get("https://dummyjson.com/posts")
     out = res.json()
     st.json(out)
