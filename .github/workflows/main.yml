@@ -15,6 +15,6 @@ jobs:
           fetch-depth: 0
           lfs: false
       - name: Push to hub
-        run: git push https://VishiKamath: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@huggingface.co/spaces/VishiKamath/python-automl main
+        run: git push https://VishiKamath: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@huggingface.co/spaces/VishiKamath/python-automl main
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
