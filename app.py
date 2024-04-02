@@ -51,7 +51,6 @@ if choice == "Model Training":
     target = st.selectbox("Select target variable", df_ml.columns)
 
     model_type = st.selectbox("Select model type", ["Classification", "Regression"])
-    MODEL_TYPE = model_type
 
     # change import based on model type
     if model_type == "Classification":
@@ -92,15 +91,15 @@ if choice == "Model Training":
         with open("./best_model/best_model.pkl", "rb") as f:
             st.download_button("Download Model", f, "trained_model.pkl")
 
-if choice == "Evaluate":
-    st.title("Evaluate")
-    st.text("Evaluate the best performing model")
-    st.info("Development In Progress")
-    # # pipeline = load_model("./best_model/best_model")
-    # # TODO: implement request to the model
-    # st.subheader("Model Request")
-    # st.divider()
-    # st.subheader("Model Response")
-    # res = requests.get("https://dummyjson.com/posts")
-    # out = res.json()
-    # st.json(out)
+# if choice == "Evaluate":
+#     st.title("Evaluate")
+#     st.text("Evaluate the best performing model")
+#     st.info("Development In Progress")
+#     # pipeline = load_model("./best_model/best_model")
+#     # TODO: implement request to the model
+#     st.subheader("Model Request")
+#     st.divider()
+#     st.subheader("Model Response")
+#     res = requests.get("https://dummyjson.com/posts")
+#     out = res.json()
+#     st.json(out)
