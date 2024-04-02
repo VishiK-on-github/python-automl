@@ -17,7 +17,7 @@ jobs:
       - name: Push to hub
         run:
           git push
-          https://VishiKamath:$env:HF_TOKEN@huggingface.co/spaces/VishiKamath/python-automl
+          https://VishiKamath:$HF_TOKEN@huggingface.co/spaces/VishiKamath/python-automl
           main
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
